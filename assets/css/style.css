@@ -452,6 +452,131 @@ h1, h2, h3, h4, h5, h6 {
   width: 100%;
 }
 
+/* ==========================================================================
+   DROPDOWN MENÜ SİSTEMİ (HAKKIMIZDA & PATENTLERİMİZ)
+   ========================================================================== */
+.nav-item-dropdown {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+}
+
+.nav-dropdown-toggle {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  cursor: pointer;
+}
+
+.dropdown-arrow {
+  font-size: 0.72rem;
+  color: var(--color-accent-gold);
+  transition: transform 0.25s ease;
+  line-height: 1;
+}
+
+.nav-item-dropdown:hover .dropdown-arrow,
+.nav-item-dropdown.open .dropdown-arrow {
+  transform: rotate(180deg);
+}
+
+.dropdown-menu {
+  position: absolute;
+  top: calc(100% + 14px);
+  left: 50%;
+  transform: translateX(-50%) translateY(8px);
+  min-width: 290px;
+  background: rgba(8, 22, 17, 0.98);
+  backdrop-filter: blur(24px);
+  -webkit-backdrop-filter: blur(24px);
+  border: 1px solid var(--border-glass-gold);
+  border-radius: var(--radius-lg);
+  box-shadow: 0 20px 45px rgba(0, 0, 0, 0.65), 0 0 25px rgba(197, 163, 106, 0.15);
+  padding: 0.65rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+  transition: opacity 0.25s cubic-bezier(0.16, 1, 0.3, 1),
+              transform 0.25s cubic-bezier(0.16, 1, 0.3, 1),
+              visibility 0.25s;
+  z-index: 1000;
+}
+
+/* Köprü (bridge) - fare linkten menüye geçerken kapanmaması için */
+.dropdown-menu::before {
+  content: '';
+  position: absolute;
+  top: -16px;
+  left: 0;
+  width: 100%;
+  height: 16px;
+}
+
+.nav-item-dropdown:hover .dropdown-menu,
+.nav-item-dropdown:focus-within .dropdown-menu,
+.nav-item-dropdown.open .dropdown-menu {
+  opacity: 1;
+  visibility: visible;
+  transform: translateX(-50%) translateY(0);
+  pointer-events: auto;
+}
+
+.dropdown-item {
+  display: flex;
+  flex-direction: column;
+  gap: 0.2rem;
+  padding: 0.75rem 1rem;
+  border-radius: var(--radius-md);
+  text-decoration: none;
+  background: transparent;
+  border-left: 2px solid transparent;
+  transition: all 0.2s ease;
+}
+
+.dropdown-item:hover,
+.dropdown-item.active {
+  background: rgba(200, 163, 107, 0.12);
+  border-left-color: var(--color-accent-gold);
+  transform: translateX(3px);
+}
+
+.dropdown-item-title {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  font-size: 0.92rem;
+  font-weight: 600;
+  color: var(--text-pure-white);
+  transition: color 0.2s ease;
+}
+
+.dropdown-item:hover .dropdown-item-title,
+.dropdown-item.active .dropdown-item-title {
+  color: var(--color-accent-gold-light);
+}
+
+.dropdown-item-desc {
+  font-size: 0.76rem;
+  color: var(--text-muted);
+  line-height: 1.35;
+}
+
+.badge-mini {
+  display: inline-block;
+  padding: 0.12rem 0.45rem;
+  font-size: 0.65rem;
+  font-weight: 700;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  background: rgba(200, 163, 107, 0.2);
+  color: var(--color-accent-gold-light);
+  border: 1px solid var(--color-accent-gold);
+  border-radius: var(--radius-full);
+}
+
 .nav-actions {
   display: flex;
   align-items: center;
@@ -2038,6 +2163,310 @@ select.form-control {
 }
 
 /* ==========================================================================
+   PATENTLERİMİZ SAYFASI VE BİLEŞENLERİ
+   ========================================================================== */
+.patent-stats-bar {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 1.5rem;
+  margin-top: 3rem;
+  padding: 1.8rem 2rem;
+  background: rgba(13, 34, 27, 0.6);
+  border: 1px solid var(--border-glass-gold);
+  border-radius: var(--radius-xl);
+  backdrop-filter: blur(12px);
+  text-align: center;
+}
+
+.patent-stat-item .stat-val {
+  font-family: var(--font-heading);
+  font-size: 2.2rem;
+  font-weight: 800;
+  color: var(--color-accent-gold-light);
+  line-height: 1.1;
+  margin-bottom: 0.3rem;
+}
+
+.patent-stat-item .stat-lbl {
+  font-size: 0.82rem;
+  color: var(--text-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+}
+
+.patent-filters {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+  justify-content: center;
+  margin-bottom: 3rem;
+}
+
+.patent-filter-btn {
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid var(--border-glass);
+  color: var(--text-body);
+  padding: 0.65rem 1.4rem;
+  border-radius: var(--radius-full);
+  font-size: 0.9rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all var(--transition-smooth);
+}
+
+.patent-filter-btn:hover {
+  border-color: var(--color-accent-gold);
+  color: #FFF;
+  background: rgba(200, 163, 107, 0.08);
+}
+
+.patent-filter-btn.active {
+  background: linear-gradient(135deg, var(--color-accent-gold) 0%, var(--color-accent-gold-dark) 100%);
+  color: #07130F;
+  border-color: var(--color-accent-gold);
+  font-weight: 700;
+  box-shadow: var(--shadow-gold);
+}
+
+.patents-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 2rem;
+}
+
+.patent-card {
+  background: var(--bg-card);
+  border: 1px solid var(--border-glass-gold);
+  border-radius: var(--radius-xl);
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  transition: all var(--transition-smooth);
+  position: relative;
+  box-shadow: var(--shadow-md);
+}
+
+.patent-card:hover {
+  transform: translateY(-6px);
+  border-color: rgba(200, 163, 107, 0.6);
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.5), 0 0 30px rgba(197, 163, 106, 0.15);
+}
+
+.patent-card-media {
+  position: relative;
+  height: 220px;
+  background: #000;
+  overflow: hidden;
+  cursor: pointer;
+}
+
+.patent-card-media img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1), filter 0.4s ease;
+  filter: brightness(0.9);
+}
+
+.patent-card:hover .patent-card-media img {
+  transform: scale(1.08);
+  filter: brightness(1.05);
+}
+
+.patent-cad-badge {
+  position: absolute;
+  top: 14px;
+  left: 14px;
+  background: rgba(7, 19, 15, 0.85);
+  border: 1px solid var(--border-glass-gold);
+  color: var(--color-accent-gold-light);
+  font-size: 0.72rem;
+  font-weight: 700;
+  padding: 0.25rem 0.65rem;
+  border-radius: var(--radius-full);
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  backdrop-filter: blur(8px);
+  z-index: 2;
+}
+
+.patent-zoom-overlay {
+  position: absolute;
+  inset: 0;
+  background: rgba(7, 19, 15, 0.5);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  color: #FFF;
+  font-size: 0.88rem;
+  font-weight: 600;
+  gap: 0.4rem;
+  z-index: 2;
+}
+
+.patent-card-media:hover .patent-zoom-overlay {
+  opacity: 1;
+}
+
+.patent-card-content {
+  padding: 1.8rem;
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+}
+
+.patent-top-meta {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.8rem;
+  margin-bottom: 0.9rem;
+  flex-wrap: wrap;
+}
+
+.patent-number-pill {
+  font-family: 'SFMono-Regular', Consolas, 'Liberation Mono', Menlo, monospace;
+  font-size: 0.84rem;
+  font-weight: 700;
+  color: var(--color-accent-gold-light);
+  background: rgba(200, 163, 107, 0.1);
+  border: 1px dashed rgba(200, 163, 107, 0.35);
+  padding: 0.25rem 0.65rem;
+  border-radius: var(--radius-sm);
+  letter-spacing: 0.04em;
+}
+
+.patent-status-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  font-size: 0.74rem;
+  font-weight: 700;
+  padding: 0.2rem 0.6rem;
+  border-radius: var(--radius-full);
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
+
+.patent-status-badge.registered {
+  background: rgba(34, 197, 94, 0.15);
+  border: 1px solid rgba(34, 197, 94, 0.4);
+  color: #4ADE80;
+}
+
+.patent-status-badge.pending {
+  background: rgba(234, 179, 8, 0.15);
+  border: 1px solid rgba(234, 179, 8, 0.4);
+  color: #FACC15;
+}
+
+.patent-status-badge.utility {
+  background: rgba(56, 189, 248, 0.15);
+  border: 1px solid rgba(56, 189, 248, 0.4);
+  color: #38BDF8;
+}
+
+.patent-title {
+  font-size: 1.22rem;
+  font-weight: 700;
+  color: var(--text-pure-white);
+  line-height: 1.35;
+  margin-bottom: 0.8rem;
+  min-height: 3.3rem;
+}
+
+.patent-desc {
+  font-size: 0.9rem;
+  color: var(--text-body);
+  line-height: 1.65;
+  margin-bottom: 1.4rem;
+  flex: 1;
+}
+
+.patent-meta-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0.75rem;
+  background: rgba(255, 255, 255, 0.02);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-md);
+  padding: 0.85rem 1rem;
+  margin-bottom: 1.2rem;
+}
+
+.meta-field-label {
+  font-size: 0.72rem;
+  color: var(--text-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  margin-bottom: 0.2rem;
+}
+
+.meta-field-value {
+  font-size: 0.84rem;
+  color: #FFF;
+  font-weight: 600;
+}
+
+.patent-highlights {
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+  margin-bottom: 1.4rem;
+}
+
+.patent-highlight-item {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.5rem;
+  font-size: 0.82rem;
+  color: var(--text-muted);
+  line-height: 1.4;
+}
+
+.patent-highlight-item span {
+  color: var(--color-accent-gold);
+  font-weight: 700;
+}
+
+.patent-actions-row {
+  display: flex;
+  gap: 0.75rem;
+  margin-top: auto;
+}
+
+.patent-notice-box {
+  background: linear-gradient(135deg, rgba(200, 163, 107, 0.1) 0%, rgba(13, 34, 27, 0.6) 100%);
+  border: 1px solid var(--border-glass-gold);
+  border-radius: var(--radius-xl);
+  padding: 2.2rem 2.6rem;
+  margin-top: 4rem;
+  box-shadow: var(--shadow-md);
+}
+
+.patent-notice-content {
+  display: grid;
+  grid-template-columns: auto 1fr auto;
+  gap: 2rem;
+  align-items: center;
+}
+
+.notice-icon-box {
+  width: 58px;
+  height: 58px;
+  border-radius: var(--radius-lg);
+  background: rgba(200, 163, 107, 0.15);
+  border: 1px solid var(--color-accent-gold);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 2rem;
+  color: var(--color-accent-gold-light);
+}
+
+/* ==========================================================================
    RESPONSIVE UYUMLULUK (MEDIA QUERIES)
    ========================================================================== */
 @media (max-width: 1024px) {
@@ -2076,6 +2505,13 @@ select.form-control {
   .contact-container-grid {
     grid-template-columns: 1fr;
   }
+  .patents-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  .patent-stats-bar {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1.2rem;
+  }
 }
 
 @media (max-width: 768px) {
@@ -2094,6 +2530,8 @@ select.form-control {
     gap: 1.2rem;
     align-items: flex-start;
     display: none;
+    max-height: calc(100vh - 80px);
+    overflow-y: auto;
   }
   .nav-menu.open {
     display: flex;
@@ -2101,6 +2539,38 @@ select.form-control {
   .menu-toggle {
     display: block;
   }
+
+  /* Mobil Dropdown Menü */
+  .nav-item-dropdown {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+  }
+  .nav-dropdown-toggle {
+    width: 100%;
+    justify-content: space-between;
+    padding: 0.5rem 0;
+  }
+  .dropdown-menu {
+    position: static;
+    transform: none !important;
+    opacity: 1;
+    visibility: visible;
+    pointer-events: auto;
+    width: 100%;
+    min-width: 100%;
+    background: rgba(255, 255, 255, 0.04);
+    border: 1px solid var(--border-glass);
+    box-shadow: none;
+    padding: 0.4rem;
+    margin-top: 0.3rem;
+    border-radius: var(--radius-md);
+  }
+  .dropdown-menu::before {
+    display: none;
+  }
+
   .ticker-grid {
     grid-template-columns: 1fr;
   }
@@ -2140,4 +2610,19 @@ select.form-control {
   }
   .lightbox-prev { left: 10px; }
   .lightbox-next { right: 10px; }
+
+  .patents-grid {
+    grid-template-columns: 1fr;
+  }
+  .patent-stats-bar {
+    grid-template-columns: 1fr;
+  }
+  .patent-notice-content {
+    grid-template-columns: 1fr;
+    text-align: center;
+    gap: 1.2rem;
+  }
+  .notice-icon-box {
+    margin: 0 auto;
+  }
 }

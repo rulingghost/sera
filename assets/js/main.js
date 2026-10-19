@@ -317,4 +317,42 @@ document.addEventListener('DOMContentLoaded', () => {
       }
     }, 1000);
   });
+
+  // 8. PATENTLERİMİZ KATEGORİ FİLTRELEME
+  const patentFilterBtns = document.querySelectorAll('.patent-filter-btn');
+  const patentCards = document.querySelectorAll('.patent-card');
+
+  if (patentFilterBtns.length > 0 && patentCards.length > 0) {
+    patentFilterBtns.forEach(btn => {
+      btn.addEventListener('click', () => {
+        patentFilterBtns.forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+        const filterCategory = btn.getAttribute('data-filter') || 'all';
+
+        patentCards.forEach(card => {
+          const cardCategory = card.getAttribute('data-category');
+          if (filterCategory === 'all' || cardCategory === filterCategory) {
+            card.style.display = 'flex';
+          } else {
+            card.style.display = 'none';
+          }
+        });
+      });
+    });
+  }
+
+  // 9. MOBİL DROPDOWN TIKLAMA DESTEĞİ
+  const dropdownToggle = document.querySelector('.nav-dropdown-toggle');
+  const dropdownParent = document.querySelector('.nav-item-dropdown');
+
+  dropdownToggle?.addEventListener('click', (e) => {
+    // Mobil görünümde tıklayınca menüyü aç/kapat
+    if (window.innerWidth <= 768) {
+      // Eğer kullanıcı doğrudan ana linke değil de oka veya kapalıyken tıkladıysa menüyü aç
+      if (!dropdownParent.classList.contains('open')) {
+        e.preventDefault();
+        dropdownParent.classList.add('open');
+      }
+    }
+  });
 });
